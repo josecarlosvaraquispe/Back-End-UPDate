@@ -3,7 +3,7 @@ using Infrastructure.Model;
 
 namespace Infraestructure;
 
-public class ActivityInfraestructure
+public class ActivityInfraestructure : IActivityInfraestructure
 {
     private UpdateDBContext _updateDbContext;
 

@@ -22,7 +22,7 @@ public class UpdateDBContext :DbContext
         if (!optionsBuilder.IsConfigured)
         {
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-            optionsBuilder.UseMySql("Server=localhost,3306;Uid=root;Pwd=enterpasswordhere;Database=databasename;", serverVersion);
+            optionsBuilder.UseMySql("Server=localhost,3306;Uid=root;Pwd=password;Database=UpDateDB;", serverVersion);
         }
     }
     
@@ -34,10 +34,10 @@ public class UpdateDBContext :DbContext
         builder.Entity<Activity>().ToTable("activities");
         builder.Entity<Activity>().HasKey(p => p.Id);
         builder.Entity<Activity>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Activity>().Property(c => c.Title).IsRequired().HasMaxLength(60);
-        builder.Entity<Activity>().Property(c => c.Description).IsRequired().HasMaxLength(240);
-        builder.Entity<Activity>().Property(c => c.Address).IsRequired().HasMaxLength(60);
-        builder.Entity<Activity>().Property(c => c.Date).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Activity>().Property(c => c.Title).HasMaxLength(60);
+        builder.Entity<Activity>().Property(c => c.Description).HasMaxLength(240);
+        builder.Entity<Activity>().Property(c => c.Address).HasMaxLength(60);
+        builder.Entity<Activity>().Property(c => c.Date).HasMaxLength(20);
         
     }
 
