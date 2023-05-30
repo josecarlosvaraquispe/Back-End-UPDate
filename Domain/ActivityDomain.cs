@@ -1,4 +1,6 @@
-﻿using Infraestructure;
+﻿using System.Runtime.InteropServices.JavaScript;
+using Infraestructure;
+using Infraestructure.DataClass;
 using Infrastructure.Model;
 
 namespace Domain;
@@ -17,14 +19,19 @@ public class ActivityDomain: IActivityDomain
         return _activityInfraestructure.GetAll();
     }
 
-    public bool Create(string Title, string Description, string Address, string Date)
+    public Activity GetById(int id)
     {
-        return _activityInfraestructure.Create(Title, Description, Address, Date);
+        return _activityInfraestructure.GetById(id);
     }
 
-    public bool Update(int id, string Title, string Description, string Address, string Date)
+    public bool Create(ActivityData activityData)
     {
-        return _activityInfraestructure.Update(id, Title, Description, Address, Date);
+        return _activityInfraestructure.Create(activityData);
+    }
+
+    public bool Update(int id, ActivityData activityData)
+    {
+        return _activityInfraestructure.Update(id, activityData);
     }
 
     public bool Delete(int id)

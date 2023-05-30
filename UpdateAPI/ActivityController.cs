@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using Infraestructure;
+using Infraestructure.DataClass;
 using Infrastructure.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,28 +29,43 @@ namespace update
         [HttpGet]
         public List<Activity> Get()
         {
+            //filter data
+            //
             return _activityDomain.GetAll();
         }
 
         // GET: api/Activity/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public Activity Get(int id)
         {
-            return "value";
+            return _activityDomain.GetById(id);
         }
 
         // POST: api/Activity
         [HttpPost]
-        public void Post([FromBody] Activity activity)
+        public void Post([FromBody] ActivityData activity)
         {
-            _activityDomain.Create(activity.Title, activity.Description, activity.Address, activity.Date);
+            /*if (ModelState.IsValid) //valida las condiciones del model 
+            {
+                Tutorial tutorial  = new Tutorial(){
+                Title= activity.Title
+                Description= activity.Description
+                Address= activity.Address
+                Date= activity.Date
+                }
+            }
+            else
+            {
+                StatusCode(400);
+            }*/
+            _activityDomain.Create(activity);
         }
 
         // PUT: api/Activity/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Activity activity)
+        public void Put(int id, [FromBody] ActivityData activity)
         {
-            _activityDomain.Update(id,activity.Title, activity.Description, activity.Address, activity.Date);
+            _activityDomain.Update(id,activity);
         }
 
         // DELETE: api/Activity/5

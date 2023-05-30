@@ -1,4 +1,5 @@
-﻿using Infrastructure.Context;
+﻿using Infraestructure.DataClass;
+using Infrastructure.Context;
 using Infrastructure.Model;
 
 namespace Infraestructure;
@@ -14,17 +15,21 @@ public class ActivityInfraestructure : IActivityInfraestructure
 
     public List<Activity> GetAll()
     {
-        return _updateDbContext.Activities.ToList();
+        return _updateDbContext.Activities.Where(activity => activity.IsActive).ToList();
     }
-    public bool Create(string Title, string Description, string Address, string Date)
+    public Activity GetById(int id)
+    {
+        return _updateDbContext.Activities.Single(activity => activity.IsActive && activity.Id == id);
+    }
+    public bool Create(ActivityData activityData)
     {
         try
         {
             Activity activity = new Activity();
-            activity.Title = Title;
-            activity.Description = Description;
-            activity.Address = Address;
-            activity.Date = Date;
+            activity.Title = activityData.Title;
+            activity.Description = activityData.Description;
+            activity.Address = activityData.Address;
+            activity.Date = activityData.Date;
             activity.IsActive = true;
 
             _updateDbContext.Activities.Add(activity);
@@ -37,16 +42,17 @@ public class ActivityInfraestructure : IActivityInfraestructure
         }
     }
 
-    public bool Update(int id, string Title, string Description, string Address, string Date)
+    public bool Update(int id, ActivityData activityData)
     {
         try
         {
+            //using (var transaction = _updateDbContext.Database.BeginTransaction()){}
             var activity = _updateDbContext.Activities.Find(id); //obtengo
 
-            activity.Title = Title;
-            activity.Description = Description;
-            activity.Address = Address;
-            activity.Date = Date;
+            activity.Title = activityData.Title;
+            activity.Description = activityData.Description;
+            activity.Address = activityData.Address;
+            activity.Date = activityData.Date;
 
             _updateDbContext.Activities.Update(activity); //modifco
 
@@ -55,7 +61,7 @@ public class ActivityInfraestructure : IActivityInfraestructure
 
             return true;
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
             return false;
         }

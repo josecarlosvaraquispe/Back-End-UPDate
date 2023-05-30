@@ -22,7 +22,7 @@ public class UpdateDBContext :DbContext
         if (!optionsBuilder.IsConfigured)
         {
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-            optionsBuilder.UseMySql("Server=localhost,3306;Uid=root;Pwd=password;Database=UpDateDB;", serverVersion);
+            optionsBuilder.UseMySql("Server=localhost,3306;Uid=root;Pwd=yonomas1995;Database=UpDateDB;", serverVersion);
         }
     }
     
@@ -38,9 +38,5 @@ public class UpdateDBContext :DbContext
         builder.Entity<Activity>().Property(c => c.Description).HasMaxLength(240);
         builder.Entity<Activity>().Property(c => c.Address).HasMaxLength(60);
         builder.Entity<Activity>().Property(c => c.Date).HasMaxLength(20);
-        
     }
-
-
-
 }
