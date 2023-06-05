@@ -27,18 +27,18 @@ namespace update.Controllers
         
         // GET: api/Activity
         [HttpGet]
-        public async Task<List<Activity>> Get()
+        public List<Activity> Get()
         {
             //filter data
             //
-            return await _activityDomain.GetAll();
+            return _activityDomain.GetAll();
         }
 
         // GET: api/Activity/5
         [HttpGet("{id}", Name = "Get")]
-        public async Task<Activity> Get(int id)
+        public Activity Get(int id)
         {
-            return await _activityDomain.GetById(id);
+            return _activityDomain.GetById(id);
         }
 
         // POST: api/Activity

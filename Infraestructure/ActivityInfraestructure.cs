@@ -1,7 +1,6 @@
 ﻿using Infraestructure.DataClass;
 using Infrastructure.Context;
 using Infrastructure.Model;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure;
 
@@ -14,15 +13,15 @@ public class ActivityInfraestructure : IActivityInfraestructure
         _updateDbContext = updateDbContext;
     }
 
-    public async Task<List<Activity>> GetAll()
+    public List<Activity> GetAll()
     {
-        return await _updateDbContext.Activities.Where(activity => activity.IsActive).ToListAsync();
+        return _updateDbContext.Activities.Where(activity => activity.IsActive).ToList();
     }
-    public async Task<Activity> GetById(int id)
+    public Activity GetById(int id)
     {
-        return await _updateDbContext.Activities.SingleAsync(activity => activity.IsActive && activity.Id == id);
+        return _updateDbContext.Activities.Single(activity => activity.IsActive && activity.Id == id);
     }
-    public async Task<bool> Create(ActivityData activityData)
+    public bool Create(ActivityData activityData)
     {
         try
         {
@@ -33,8 +32,8 @@ public class ActivityInfraestructure : IActivityInfraestructure
             activity.Date = activityData.Date;
             activity.IsActive = true;
 
-            await _updateDbContext.Activities.AddAsync(activity);
-            await _updateDbContext.SaveChangesAsync();
+            _updateDbContext.Activities.Add(activity);
+            _updateDbContext.SaveChanges();
             return true;
         }
         catch (Exception exception)

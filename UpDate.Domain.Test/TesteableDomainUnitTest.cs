@@ -16,7 +16,7 @@ public class UnitTest1
         //Arrange - setup
         TesteableClass testeableClass = new TesteableClass();
         
-        //Act - exce
+        //Act -exce
         int result = testeableClass.sum(numberA, numberB);
         
         //Assert
@@ -24,7 +24,7 @@ public class UnitTest1
         
 
     }
-    
+
     [Fact]
     public void Create_ValidActivity_ReturnSuccess()
     {
@@ -35,12 +35,12 @@ public class UnitTest1
         var mockTutorialInfraestructure = new Mock<IActivityInfraestructure>();
         mockTutorialInfraestructure.Setup(t =>
                 t.Create(activityData))
-            .ReturnsAsync(true);
+            .Returns(true);
         ActivityDomain activityDomain = new ActivityDomain(mockTutorialInfraestructure.Object);
 
         var returnValue = activityDomain.Create(activityData);
         
-        Assert.True(returnValue.Result);
+        Assert.True(returnValue);
     }
     
     [Fact]
@@ -53,12 +53,12 @@ public class UnitTest1
         var mockTutorialInfraestructure = new Mock<IActivityInfraestructure>();
         mockTutorialInfraestructure.Setup(t =>
                 t.Create(activityData))
-            .ReturnsAsync(false);
+            .Returns(false);
         ActivityDomain activityDomain = new ActivityDomain(mockTutorialInfraestructure.Object);
 
         var returnValue = activityDomain.Create(activityData);
         
-        Assert.False(returnValue.Result);
+        Assert.False(returnValue);
     }
    
     [Fact]

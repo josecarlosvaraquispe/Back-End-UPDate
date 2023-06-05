@@ -14,19 +14,19 @@ public class ActivityDomain: IActivityDomain
         _activityInfraestructure = activityInfraestructure;
     }
 
-    public async Task<List<Activity>> GetAll()
+    public List<Activity> GetAll()
     {
-        return await _activityInfraestructure.GetAll();
+        return _activityInfraestructure.GetAll();
     }
 
-    public async Task<Activity> GetById(int id)
+    public Activity GetById(int id)
     {
-        return await _activityInfraestructure.GetById(id);
+        return _activityInfraestructure.GetById(id);
     }
 
-    public async Task<bool> Create(ActivityData activityData)
+    public bool Create(ActivityData activityData)
     {
-        return await _activityInfraestructure.Create(activityData);
+        return _activityInfraestructure.Create(activityData);
     }
 
     public bool Update(int id, ActivityData activityData)
