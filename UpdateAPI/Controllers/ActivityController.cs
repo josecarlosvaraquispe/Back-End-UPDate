@@ -9,7 +9,7 @@ using Infrastructure.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace update
+namespace update.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,18 +27,18 @@ namespace update
         
         // GET: api/Activity
         [HttpGet]
-        public List<Activity> Get()
+        public async Task<List<Activity>> Get()
         {
             //filter data
             //
-            return _activityDomain.GetAll();
+            return await _activityDomain.GetAll();
         }
 
         // GET: api/Activity/5
         [HttpGet("{id}", Name = "Get")]
-        public Activity Get(int id)
+        public async Task<Activity> Get(int id)
         {
-            return _activityDomain.GetById(id);
+            return await _activityDomain.GetById(id);
         }
 
         // POST: api/Activity
