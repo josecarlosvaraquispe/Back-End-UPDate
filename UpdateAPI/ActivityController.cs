@@ -9,7 +9,7 @@ using Infrastructure.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace update.Controllers
+namespace update
 {
     [Route("api/[controller]")]
     [ApiController]
