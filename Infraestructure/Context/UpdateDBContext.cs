@@ -15,7 +15,7 @@ public class UpdateDBContext :DbContext
     }
     
     public  DbSet<Activity> Activities { get; set; }
-    public DbSet<Community> Communities { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -38,12 +38,5 @@ public class UpdateDBContext :DbContext
         builder.Entity<Activity>().Property(c => c.Description).HasMaxLength(240);
         builder.Entity<Activity>().Property(c => c.Address).HasMaxLength(60);
         builder.Entity<Activity>().Property(c => c.Date).HasMaxLength(20);
-
-        builder.Entity<Community>().ToTable("communities");
-        builder.Entity<Community>().HasKey(p => p.Id);
-        builder.Entity<Community>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Community>().Property(c => c.Name).IsRequired().HasMaxLength(60);
-        builder.Entity<Community>().Property(c => c.Description).IsRequired().HasMaxLength(240);
-        builder.Entity<Community>().Property(c => c.CreatedAt).IsRequired().HasMaxLength(20);
     }
 }
