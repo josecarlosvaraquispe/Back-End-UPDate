@@ -20,6 +20,11 @@ builder.Services.AddScoped<IActivityDomain, ActivityDomain>();
 var connectionString = builder.Configuration.GetConnectionString("upDateConnection");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 builder.Services.AddDbContext<UpdateDBContext>(
     dbContextOptions =>
     {
